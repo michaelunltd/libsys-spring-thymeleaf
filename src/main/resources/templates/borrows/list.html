@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container col-md-8 col-md-offset-2">
+			<h3>Borrow Transactions List</h3>
+			<table id="datatable" class="table table-striped" style="margin-top: 10px;">
+				<thead>
+					<tr>
+						<th>Transaction ID</th>
+						<th>Borrower ID</th>
+						<th>Date Borrowed</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="borrow : ${borrows}">
+						<td th:text="${borrow.transactionId}"></td>
+						<td th:text="${borrow.student.studentId}"></td>
+						<td th:text="${borrow.dateBorrowed}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</html>

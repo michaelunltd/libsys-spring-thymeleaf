@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container col-md-8 col-md-offset-2">
+			<form id="form" action="#" th:action="@{'/students/' + ${borrow.student.id} + '/studentBorrows/save'}" th:object="${borrow}" method="post">
+				<h1>Borrow Transaction</h1>
+				<h3 th:text="${borrow.transactionId}"></h3>
+				<h6 th:text="'Borrower Name: ' + ${borrow.student.firstName} + ' ' + ${borrow.student.lastName}"></h6>
+				<div class="form-group">
+				    <label>Transaction ID</label>
+				    <input type="text" th:field="*{transactionId}" class="form-control" th:value="*{transactionId}" placeholder="Enter transaction id" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+				    <label>Borrower</label>
+				    <input type="text" class="form-control" th:value="*{student.firstName} + ' ' + *{student.lastName}" placeholder="Enter student name" readonly="readonly" />
+					<input type="hidden" th:field="*{student.id}" th:value="*{student.firstName}" />
+				</div>
+				<div class="form-group pull-right">
+					<button name="addBook" class="btn btn-primary">Add Book Item</button>
+					<button id="submit-btn" class="btn btn-primary">Submit</button>
+				</div>
+				<div class="row">
+					<h6>Book Items</h6>
+					<div class="form-group">
+						<p>BorrowedBook sample</p>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<td>Book</td>
+									<td>Quantity</td>
+									<td>Remove</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="borrowedBook, stat : *{borrowedBooks}">
+									<td>
+										<select th:field="*{borrowedBooks[__${stat.index}__].book.id}">
+											<option th:each="book : ${books}"
+													th:value="${book.id}"
+													th:text="${book.title}">
+											</option>
+										</select>
+									</td>
+									<td>
+										<input type="number" th:field="*{borrowedBooks[__${stat.index}__].quantity}"/>
+									</td>
+									<td>
+										<p th:text="${stat.index}"></p>
+										<button name="removeBook" class="btn btn-primary" th:value="${stat.index}">Remove</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+		<script>
+			$(document).ready(function() {
+				$('#form').submit(function(event) {
+					console.log($('#form').serialize());
+				})
+			})
+		</script>
+	</div>
+</html>

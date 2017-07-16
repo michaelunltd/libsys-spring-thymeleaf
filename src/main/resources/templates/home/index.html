@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container" style="text-align:center">
+		    <div class="jumbotron">
+		        <div class="row">
+		            <div class="col-md-8 col-md-offset-2">
+		                <h1>Library Management System</h1>
+		                <div><p>Libsys v0.0.1</p></div>
+		                <div class="row">
+		                    <div class="col-md-6">
+		                    	<a th:href="@{/students/new}">
+	                    			<button type="button" class="btn btn-default btn-lg">Student Register</button>
+		                    	</a>
+		                    </div>
+							<div class="col-md-6">
+								<a th:href="@{/books/new}">
+			                    	<button type="button" class="btn btn-default btn-lg">Book Register</button>
+								</a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</html>

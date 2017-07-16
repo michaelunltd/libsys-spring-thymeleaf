@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container col-md-8 col-md-offset-2">
+			<h1>Borrow Transaction</h1>
+			<h3 th:text="${borrow.transactionId}"></h3>
+			<h6 th:text="'Borrower Name: ' + ${borrow.student.firstName} + ' ' + ${borrow.student.lastName}"></h6>
+			<p th:text="'Date: ' + ${borrow.dateBorrowed.toString()}" style="color:gray;"></p>
+			<div class="row pull-right">
+				<a th:href="@{'/students/' + ${borrow.getStudent().getId()} +'/borrows/' + ${borrow.getId()} + '/delete'}"><button class="btn btn-danger">Delete</button></a>
+				<a th:href="@{'/borrows/' + ${borrow.id} + '/borrowedBooks/add'}"><button class="btn btn-primary">Add Book Item</button></a>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Book</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="borrowedBook : ${borrow.getBorrowedBooks()}">
+						<td th:text="${borrowedBook.book.title}"></td>
+						<td th:text="${borrowedBook.quantity}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</html>

@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="book-details">
+					<h3 th:text="'Book Details: ' + ${book.getBookCode()}"></h3>
+					<h4 th:text="'Title: ' + ${book.getTitle()}"></h4>
+					<h4 th:text="'Author: ' + ${book.getAuthor()}"></h4>
+					<h4 th:text="'Total Stocks: ' + ${book.getNumberOfCopies()}"></h4>
+					<h4 th:text="'Stocks Remaining: ' + ${book.getRemainingCopies()}"></h4>
+				</div>
+				<div class="row">
+					<a th:href="@{'/books/' + ${book.getId()}] + '/addBorrow'}"><button class="btn btn-primary pull-right">New Borrow Transaction</button></a>
+					<a th:href="@{'/books/' + ${book.getId()} + '/edit'}"><button class="btn btn-primary pull-right">Edit</button></a>
+					<a th:href="@{'/books/' + ${book.getId()} + '/delete'}"><button class="btn btn-danger pull-right">Delete</button></a>
+				</div>
+				<div class="student-borrow-list">
+					<h3>Borrow History</h3>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td>Borrow Transaction ID</td>
+								<td>Borrower ID</td>
+								<td>Quantity</td>
+								<td>Date Borrowed</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="borrowedBook : ${book.getBorrowedBooks()}">
+								<td th:text="${borrowedBook.borrow.transactionId}"></td>
+								<td th:text="${borrowedBook.borrow.student.studentId}"></td>
+								<td th:text="${borrowedBook.quantity}"></td>
+								<td th:text="${borrowedBook.borrow.dateBorrowed}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

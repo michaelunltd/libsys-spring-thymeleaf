@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="student-details">
+					<h3 th:text="'Student Details: ' + ${student.getStudentId()}"></h3>
+					<h4 th:text="'First Name: ' + ${student.getFirstName()}"></h4>
+					<h4 th:text="'Last Name: ' + ${student.getLastName()}"></h4>
+				</div>
+				<div class="row">
+					<a th:href="@{'/students/' + ${student.getId()} + '/studentBorrows/add'}"><button class="btn btn-primary pull-right">New Borrow Transaction</button></a>
+					<a th:href="@{'/students/' + ${student.getId()} + '/edit'}"><button class="btn btn-primary pull-right">Edit</button></a>
+					<a th:href="@{'/students/' + ${student.getId()} + '/delete'}"><button class="btn btn-danger pull-right">Delete</button></a>
+				</div>
+				<div class="student-borrow-list">
+					<h3>Borrow Transactions</h3>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>TransactionId</th>
+								<th>Date</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="borrow : ${student.borrows}">
+								<td th:text="${borrow.transactionId}"></td>
+								<td th:text="${borrow.dateBorrowed.toString()}"></td>
+								<td>
+									<a th:href="@{'/borrows/' + ${borrow.getId()}}"><button class="btn btn-primary">Details</button></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

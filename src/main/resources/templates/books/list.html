@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/mainlayout">
+
+	<div layout:fragment="content">
+		<div class="container col-md-8 col-md-offset-2">
+			<h3>Book List</h3>
+			<div class="row">
+				<div class="col-lg-12" style="padding-bottom: 10px">
+					<a th:href="@{/books/new}"><button class="btn btn-primary pull-right">Add Book</button></a>
+				</div>
+			</div>
+			<table id="datatable" class="table table-striped" style="margin-top: 10px;">
+				<thead>
+					<tr>
+						<th>Book Code</th>
+						<th>Title</th>
+						<th>Author</th>
+						<th>Total Stocks</th>
+						<th>Stocks Left</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book : ${books}">
+						<td th:text="${book.getBookCode()}"></td>
+						<td th:text="${book.getTitle()}"></td>
+						<td th:text="${book.getAuthor()}"></td>
+						<td th:text="${book.getNumberOfCopies()}"></td>
+						<td th:text="${book.getRemainingCopies()}"></td>
+						<td><a th:href="@{'/books/' + ${book.getId()}}"><button class="btn btn-primary">Details</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</html>

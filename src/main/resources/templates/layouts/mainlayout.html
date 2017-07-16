@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Lib Sys :: Library Management</title>
+	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/webjars/datatables/1.9.4/media/css/jquery.dataTables.css"/>
+	<style>
+		th, td {
+			text-align: center;			
+		}
+		.btn {
+			margin-left: 2px;
+			margin-right:2px;
+		}
+	</style>
+</head>
+<body>
+	<script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+	<script src="/webjars/datatables/1.9.4/media/js/jquery.dataTables.min.js"></script>
+	<div th:replace="/fragments/navbar :: navbar"></div>
+	<div layout:fragment="content"></div>
+	<script>
+		$(document).ready(function() {
+			console.log('ready');
+			$('#datatable').DataTable({
+				paging : true,
+				searching: true,
+				ordering: true,
+				bSortClasses: false
+			});
+		})
+	</script>
+</body>
+</html>
